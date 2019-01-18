@@ -14,18 +14,19 @@ def getVersion(){
 def run_bandit_test(){
   return_s= sh( returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
   script{
-  //echo "${bandit_status}"
-  if ("${return_s}" != '0') {
-    //publish results
-    publishHTML (target: [
-      allowMissing: false,
-      alwaysLinkToLastBuild: false,
-      keepAll: true,
-      reportDir: './',
-      reportFiles: 'shared/banditReport.html',
-      reportName: "Bandit Report"
-    ])
-    error "Bandit test failed : (${env.BUILD_URL})"
+    //echo "${bandit_status}"
+    if ("${return_s}" != '0') {
+      //publish results
+      publishHTML (target: [
+        allowMissing: false,
+        alwaysLinkToLastBuild: false,
+        keepAll: true,
+        reportDir: './',
+        reportFiles: 'shared/banditReport.html',
+        reportName: "Bandit Report"
+      ])
+      error "Bandit test failed : (${env.BUILD_URL})"
+    }
   }
 }
 
