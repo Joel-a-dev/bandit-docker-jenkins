@@ -41,7 +41,7 @@ pipeline {
       BANDIT_DOCKER_SCRIPT='bandit_test_docker.sh'
       BANDIT_IMAGE='bandit'
       BANDIT_TAG='python3-alpine'
-      CONTAINER='bandit'
+      CONTAINER='bandit_tests'
     }
 
   stages {
