@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#set -v 
+set -v 
 #BANDIT_CONFIG='config/bandit.config.yaml'
 REPORT_HTML='banditReport.html'
 REPORT_TXT='banditReport.txt'
