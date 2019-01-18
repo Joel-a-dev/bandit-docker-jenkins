@@ -22,7 +22,7 @@ def run_bandit_test(){
         keepAll: true,
         reportDir: './',
         reportFiles: 'shared/banditReport.html',
-        reportName: "Bandit Report"
+        reportName: "Bandit.Report"
       ])
       error "Bandit test failed : (${env.BUILD_URL})"
     }
