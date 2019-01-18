@@ -52,7 +52,6 @@ pipeline {
       steps {
         script{
           return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
-          return_s= sh( returnStatus:true, script:"bash ${DOCKER_SETUP_SCRIPT}")
           echo "${return_s}"
         
           if ("${return_s}" != '0') {
