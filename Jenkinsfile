@@ -53,26 +53,10 @@ pipeline {
     }
     stage("Bandit-Docker") {
       steps {
-        script{
-          return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
-          echo "${return_s}"
-        
-          if ("${return_s}" != '0') {
-          //publish results
-          publishHTML (target: [
-            allowMissing: false,
-            alwaysLinkToLastBuild: false,
-            keepAll: true,
-            reportDir: './',
-            reportFiles: 'shared/banditReport.html',
-            reportName: "Bandit Report"
-          ])
-          error "Bandit test failed : (${env.BUILD_URL})"
-          }
+        run_bandit_test()
         }
-      }
-      }
     }
+  }
   
   // Post in Stage executes at the end of Stage instead of end of Pipeline
   post {
