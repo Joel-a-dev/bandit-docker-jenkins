@@ -14,7 +14,7 @@ def getVersion(){
 def run_bandit_test(){
   return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
   echo "${return_s}"
-    //echo "${bandit_status}"
+    //echo "$r{bandit_status}"
     if ("${return_s}" != '0') {
       //publish results
       publishHTML (target: [
@@ -45,10 +45,26 @@ pipeline {
     }
     stage("Bandit-Docker") {
       steps {
-        run_bandit_test()
+        script{
+          return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
+          echo "${return_s}"
+        
+          if ("${return_s}" != '0') {
+          //publish results
+          publishHTML (target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: true,
+            reportDir: './',
+            reportFiles: 'shared/banditReport.html',
+            reportName: "Bandit Report"
+          ])
+          error "Bandit test failed : (${env.BUILD_URL})"
+          }
+        }
+      }
       }
     }
-  }
   
   // Post in Stage executes at the end of Stage instead of end of Pipeline
   post {
