@@ -41,7 +41,7 @@ pipeline {
     stage("Initialization") {
       steps{
         // set variables and generate files
-        sh "bash ${INIT_GENERATOR_SCRIPT}"
+        sh "bash ${INIT_GENERATOR_SCRIPT} fail"
       }
     }
     stage("Bandit-Docker") {
