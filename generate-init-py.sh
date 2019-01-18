@@ -23,15 +23,7 @@ build_timestamp = '$BUILD_TIMESTAMP'
 
 if [ "$1" == 'fail' ]; then
   # Create test.py file 
-  echo "
-  import os
-
-  __version__ = '$GHE_VERSION'
-
-  commit_hash = '$GIT_COMMIT'
-
-  build_timestamp = '$BUILD_TIMESTAMP'
-  " > test_files/test.py
+  echo "assert true" > test_files/test.py
 fi
 
 
