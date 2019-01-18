@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.6-slim
 #RUN apt-get update                          && \
 #    apt-get install -y tree                 && \
 #    apt-get install -y ca-certificates git 
