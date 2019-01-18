@@ -13,7 +13,6 @@ def getVersion(){
 
 def run_bandit_test(){
   return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
-  echo "${return_s}"
     //echo "$r{bandit_status}"
     if ("${return_s}" != '0') {
       //publish results
@@ -48,7 +47,7 @@ pipeline {
     stage("Initialization") {
       steps{
         // set variables and generate files
-        sh "bash ${INIT_GENERATOR_SCRIPT} fail"
+        sh "bash ${INIT_GENERATOR_SCRIPT}"
       }
     }
     stage("Bandit-Docker") {
