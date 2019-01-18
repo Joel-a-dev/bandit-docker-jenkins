@@ -23,8 +23,15 @@ build_timestamp = '$BUILD_TIMESTAMP'
 
 if [ "$1" == 'fail' ]; then
   # Create test.py file 
-  echo "assert true" > test_files/test.py
+  echo "
+  assert true
+  
+  assert true
+
+  " > test_files/test.py
 fi
+echo "FROM THE GENERATION SCRIPT"
+cat test_files/test.py
 
 
 
