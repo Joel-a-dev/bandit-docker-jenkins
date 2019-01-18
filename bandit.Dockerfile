@@ -3,10 +3,10 @@ FROM python:3.6-alpine
 #    apt-get install -y tree                 && \
 #    apt-get install -y ca-certificates git 
 COPY . /bandit
-RUN echo $(ls)
-RUN echo $(ls /shared)
 #RUN pip3 install bandit                      
 RUN mkdir -p /bandit                        
 RUN chmod +x /bandit/shared/run_bandit.sh
-CMD ["/bandit/shared/run_bandit.sh"]
+WORKDIR /bandit
+RUN echo $(ls)
+CMD ["./shared/run_bandit.sh"]
 
