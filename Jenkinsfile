@@ -38,7 +38,7 @@ pipeline {
   environment {
       dir=pwd()
       INIT_GENERATOR_SCRIPT='generate-init-py.sh'
-      BANDIT_DOCKER_SCRIPT='./bandit/bandit_test_docker.sh'
+      BANDIT_DOCKER_SCRIPT='bandit_test_docker.sh'
       BANDIT_IMAGE='bandit'
       BANDIT_TAG='python3-alpine'
       CONTAINER='bandit'
