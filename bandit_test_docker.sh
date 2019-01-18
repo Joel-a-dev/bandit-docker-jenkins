@@ -1,8 +1,5 @@
 #!/bin/bash 
 
-export BANDIT_IMAGE='bandit'
-export BANDIT_TAG='python3-alpine'
-export CONTAINER='bandit'
 DOCKERFILE='bandit.Dockerfile'
 PWD=$(pwd)
 chmod +x ./shared/run_bandit.sh
