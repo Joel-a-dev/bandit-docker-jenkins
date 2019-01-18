@@ -5,7 +5,6 @@ FROM python:3.6-alpine
 COPY . /bandit
 #RUN pip3 install bandit                      
 RUN mkdir -p /bandit                        
-RUN chown -R $USER: /bandit
 RUN chmod +x /bandit/shared/run_bandit.sh
 WORKDIR /bandit
 CMD ["./shared/run_bandit.sh"]
