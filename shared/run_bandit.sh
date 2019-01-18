@@ -5,16 +5,6 @@ set -v
 REPORT_HTML='banditReport.html'
 REPORT_TXT='banditReport.txt'
 
-if ! bandit -r -f txt -o shared/${REPORT_TXT} . ; then
-    echo "Command txt succeeded"
-else
-    echo "Command txt failed"
-fi
+bandit -r -f txt -o shared/${REPORT_TXT} .
 
-if ! bandit -r -f txt -o shared/${REPORT_TXT} . ; then
-    echo "Command html succeeded"
-else
-    echo "Command html failed"
-fi
-
-echo $(cat shared/"${REPORT_TXT}")
+bandit -r -f txt -o shared/${REPORT_TXT} . 
