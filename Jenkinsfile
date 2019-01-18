@@ -12,9 +12,8 @@ def getVersion(){
 }
 
 def run_bandit_test(){
-  return_s= sh( returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
-  echo return_s
-  script{
+  return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
+  echo "${return_s}"
     //echo "${bandit_status}"
     if ("${return_s}" != '0') {
       //publish results
@@ -28,7 +27,6 @@ def run_bandit_test(){
       ])
       error "Bandit test failed : (${env.BUILD_URL})"
     }
-  }
 }
 
 pipeline {
