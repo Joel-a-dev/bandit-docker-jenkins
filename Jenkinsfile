@@ -44,15 +44,13 @@ pipeline {
         sh "bash ${INIT_GENERATOR_SCRIPT}"
       }
     }
-      stage("Bandit-Docker") {
-        steps {
-
-          run_bandit_test()
-          
-          }
-        }
+    stage("Bandit-Docker") {
+      steps {
+        run_bandit_test()
       }
+    }
   }
+  
   // Post in Stage executes at the end of Stage instead of end of Pipeline
   post {
     always{
@@ -69,3 +67,4 @@ pipeline {
     }
   }
 }
+
