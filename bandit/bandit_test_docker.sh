@@ -1,4 +1,5 @@
 #!/bin/bash 
+cd ..
 PWD=$(pwd)
 DOCKERFILE='bandit/bandit.Dockerfile'
 

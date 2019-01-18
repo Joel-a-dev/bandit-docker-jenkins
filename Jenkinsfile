@@ -12,7 +12,9 @@ def getVersion(){
 }
 
 def run_bandit_test(){
-  return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
+    dir('bandit'){
+      return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
+    }
     //echo "$r{bandit_status}"
     if ("${return_s}" != '0') {
       //publish results
