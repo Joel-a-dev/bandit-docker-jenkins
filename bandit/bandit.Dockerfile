@@ -6,8 +6,8 @@ RUN mkdir -p /bandit                               && \
 
 COPY . /bandit
 
-RUN chmod +x /bandit/shared/run_bandit.sh
+RUN chmod +x /bandit/bandit/run_bandit.sh
 
 WORKDIR /bandit
 
-CMD ["./shared/run_bandit.sh"]
+CMD ["./bandit/run_bandit.sh"]
