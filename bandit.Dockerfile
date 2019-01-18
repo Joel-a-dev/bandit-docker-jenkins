@@ -7,6 +7,6 @@ COPY . /bandit
 RUN mkdir -p /bandit                        
 RUN chmod +x /bandit/shared/run_bandit.sh
 WORKDIR /bandit
-RUN echo $(ls /shared)
-CMD ["./shared/run_bandit.sh"]
+RUN echo $(ls shared/)
+CMD ["shared/run_bandit.sh"]
 
