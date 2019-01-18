@@ -8,5 +8,5 @@ RUN mkdir -p /bandit
 RUN chmod +x /bandit/shared/run_bandit.sh
 WORKDIR /bandit
 RUN echo $(ls shared/)
-CMD ["shared/run_bandit.sh"]
+#aCMD ["shared/run_bandit.sh"]
 
