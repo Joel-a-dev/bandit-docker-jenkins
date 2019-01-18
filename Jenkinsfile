@@ -15,16 +15,12 @@ def run_bandit_test(){
   return_s= sh( returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
 }
 
-def cleanDocker(){
-  sh "echo WIP"
-}
-
 pipeline {
   agent any
   
   environment {
       INIT_GENERATOR_SCRIPT='generate-init-py.sh'
-      BANDIT_DOCKER_SCRIPT='mount_bandit.sh'
+      BANDIT_DOCKER_SCRIPT='bandit_test_docker.sh'
       DOCKER_SETUP_SCRIPT='mount_bandit'
     }
 
