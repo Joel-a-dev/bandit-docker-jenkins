@@ -13,6 +13,7 @@ def getVersion(){
 
 def run_bandit_test(){
   return_s= sh( returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
+  echo return_s
   script{
     //echo "${bandit_status}"
     if ("${return_s}" != '0') {
