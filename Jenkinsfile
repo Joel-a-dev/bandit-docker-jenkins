@@ -29,6 +29,11 @@ def run_bandit_test(){
     }
 }
 
+def cleanDocker(){
+  sh "docker rm ${CONTAINER}"
+  //sh docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
+}
+
 pipeline {
   agent any
   environment {
@@ -47,6 +52,7 @@ pipeline {
       steps {
         script{
           return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
+          return_s= sh( returnStatus:true, script:"bash ${DOCKER_SETUP_SCRIPT}")
           echo "${return_s}"
         
           if ("${return_s}" != '0') {
@@ -70,6 +76,7 @@ pipeline {
   post {
     always{
       deleteDir()
+      cleanDocker()
     }
     success {
       echo "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
