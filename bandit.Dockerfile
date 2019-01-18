@@ -20,8 +20,8 @@ COPY . /bandit
 
 # install python and bandit 
 RUN apk add --no-cache py3-pip python3 bash        && \
-    pip install --no-cache-dir -U pip              && \
-    pip install --no-cache-dir -U bandit           && \
+    pip3 install --no-cache-dir -U pip              && \
+    pip3 install --no-cache-dir -U bandit           && \
     mkdir -p /bandit                               && \
     addgroup -S bandit                             && \
     adduser -D -S -h /src -G bandit bandit         && \
