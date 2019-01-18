@@ -36,6 +36,7 @@ def cleanDocker(){
 pipeline {
   agent any
   environment {
+      dir=pwd()
       INIT_GENERATOR_SCRIPT='generate-init-py.sh'
       BANDIT_DOCKER_SCRIPT='./bandit/bandit_test_docker.sh'
       BANDIT_IMAGE='bandit'
@@ -46,7 +47,7 @@ pipeline {
   stages {
     stage("Initialization") {
       steps{
-        echo "\$(pwd)"
+        echo "DIR: ${dir}"
         // set variables and generate files
         sh "bash ${INIT_GENERATOR_SCRIPT}"
       }
