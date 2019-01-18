@@ -48,6 +48,7 @@ pipeline {
     stage("Initialization") {
       steps{
         echo "DIR: ${dir}"
+        sh "echo \$(ls)"
         // set variables and generate files
         sh "bash ${INIT_GENERATOR_SCRIPT}"
       }
