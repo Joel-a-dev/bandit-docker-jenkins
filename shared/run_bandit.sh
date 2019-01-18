@@ -5,7 +5,7 @@
 REPORT_HTML='banditReport.html'
 REPORT_TXT='banditReport.txt'
 
-bandit -r -q -f txt -o shared/${REPORT_TXT} .
-bandit -r -q -f html -o shared/${REPORT_HTML} .
+bandit -r -f txt -o shared/${REPORT_TXT} . &>/dev/null
+bandit -r -f html -o shared/${REPORT_HTML} . &>/dev/null
 
 echo $(cat shared/"${REPORT_TXT}")
