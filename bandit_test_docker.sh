@@ -10,6 +10,6 @@ if [[ "$(docker images -q ${BANDIT_IMAGE}:${BANDIT_TAG} 2> /dev/null)" == "" ]];
   echo "docker image does not exist, building..."
   docker build -t ${BANDIT_IMAGE}:${BANDIT_TAG} -f ${DOCKERFILE} .
 else
-  echo "docker image already exists, skipping build"
+  echo "docker image already exists, skipping build..."
 fi
 docker run --name ${CONTAINER} -v ${PWD}/bandit/:/bandit/bandit ${BANDIT_IMAGE}:${BANDIT_TAG} 
