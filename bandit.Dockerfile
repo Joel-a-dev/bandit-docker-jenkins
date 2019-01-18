@@ -1,35 +1,13 @@
-#FROM python:3.6-slim
-#RUN apt-get update                          && \
-#    apt-get install -y tree                 && \
-#    apt-get install -y ca-certificates git 
-#COPY . /bandit
-#RUN pip3 install bandit                      
-#RUN mkdir -p /bandit                        
-#RUN chmod +x /bandit/shared/run_bandit.sh
-#WORKDIR /bandit
-#RUN echo $(ls shared/)
-#CMD ["/bandit/shared/run_bandit.sh"]
+FROM python:3.6-slim
 
-FROM alpine
-
-
-ENV PYTHONUNBUFFERED 1
-ENV user=bandit
+RUN pip install bandit 
+RUN mkdir -p /bandit                               && \
+    chown -R $USER: /bandit
 
 COPY . /bandit
 
-# install python and bandit 
-RUN apk add --no-cache py2-pip python2 bash        && \
-    pip install --no-cache-dir -U pip              && \
-    pip install --no-cache-dir -U bandit           && \
-    mkdir -p /bandit                               && \
-    addgroup -S bandit                             && \
-    adduser -D -S -h /src -G bandit bandit         && \
-    chown -R bandit:bandit /bandit
-
-USER ${user}
+RUN chmod +x /bandit/shared/run_bandit.sh
 
 WORKDIR /bandit
 
-CMD ["/bandit/shared/run_bandit.sh"]
-
+CMD ["./shared/run_bandit.sh"]
