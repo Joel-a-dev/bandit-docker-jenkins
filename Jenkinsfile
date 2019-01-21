@@ -15,7 +15,7 @@ def run_bandit_test(){
     dir('bandit'){
       return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
     }
-    sh "docker rm -v ${CONTAINER}"
+    sh "docker rm  ${CONTAINER}"
     sh "docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
 
     if ("${return_s}" != '0') {
