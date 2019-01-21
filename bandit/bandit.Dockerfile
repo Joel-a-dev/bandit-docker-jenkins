@@ -1,11 +1,11 @@
 FROM python:3.6-slim
 
-COPY . /app_tmp
+COPY . /app_src
 
 RUN pip install bandit                   && \
     mkdir /reports                       && \
     chmod -R 777 /reports
-#    chown -R $USER: /app_tmp
-RUN chmod a+x /app_tmp/bandit/run_bandit.sh
-WORKDIR /app_tmp
-CMD ["/app_tmp/bandit/run_bandit.sh"]
+#    chown -R $USER: /app_src
+RUN chmod a+x /app_src/bandit/run_bandit.sh
+WORKDIR /app_src
+CMD ["/app_src/bandit/run_bandit.sh"]
