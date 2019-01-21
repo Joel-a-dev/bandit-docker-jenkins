@@ -34,7 +34,7 @@ def run_bandit_test(){
 }
 
 pipeline {
-  agent any
+  agent none
   environment {
       dir=pwd()
       INIT_GENERATOR_SCRIPT='generate-init-py.sh'
@@ -46,17 +46,22 @@ pipeline {
 
   stages {
     stage("init"){
-      echo "this is an init stage"
+      agent any
+      steps{
+        echo "this is an init stage"
+      }
     }
     stage("Main Pipeline"){
       parallel{
         stage("Initialization") {
+          agent any
           steps{
             // set variables and generate files
             sh "bash ${INIT_GENERATOR_SCRIPT}"
           }
         }
         stage("Bandit-Docker") {
+          agent any
           steps {
             run_bandit_test()
           }
