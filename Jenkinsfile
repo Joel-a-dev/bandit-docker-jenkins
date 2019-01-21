@@ -15,7 +15,6 @@ def run_bandit_test(){
     dir('bandit'){
       return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
     }
-    
     sh "docker rm -v ${CONTAINER}"
     sh "docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
 
@@ -91,6 +90,7 @@ pipeline {
   // Post in Stage executes at the end of Stage instead of end of Pipeline
   post {
     always{
+      clean_reports()
       deleteDir()
     }
     success {
