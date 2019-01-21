@@ -7,6 +7,6 @@ REPORT_TXT='/app_tmp/.bandit/reports/banditReport.txt'
 
 mkdir '/app_tmp/.bandit/reports'
 
-bandit -r -c ${BANDIT_CONFIG}  -f txt -o ${REPORT_TXT} ../.
+bandit -r -f txt -o ${REPORT_TXT} /app_tmp
 cat ${REPORT_TXT}
-bandit -r -c ${BANDIT_CONFIG}  -f html -o ${REPORT_HTML} ../.
+bandit -r -f html -o ${REPORT_HTML} /app_tmp
