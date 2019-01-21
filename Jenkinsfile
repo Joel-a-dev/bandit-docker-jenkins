@@ -7,7 +7,7 @@ def getBuildTimestamp(){
 }
 
 def getVersion(){
-  sh(script: "git fetch --tags")
+  //sh(script: "git fetch --tags")
   return sh(returnStdout: true, script: "git describe --tags --abbrev=0").toString().trim()
 }
 
@@ -34,7 +34,7 @@ def run_bandit_test(){
 }
 
 def getVersioningVariables(){
-    sh "git fetch --tags"
+    //sh "git fetch --tags"
     sh "echo -e \"export GIT_COMMIT=\$(git rev-parse HEAD)\nexport GHE_VERSION=\$(git describe --tags --abbrev=0)\nexport BUILD_TIMESTAMP=\$(date +'%Y-%m-%dT%H:%M:%SZ')\" > .version_vars.conf"
     stash includes: ".version_vars.conf", name:"versionVars"
 
