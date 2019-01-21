@@ -33,6 +33,12 @@ def run_bandit_test(){
     }
 }
 
+def getVersioningVariables(){
+    sh "git fetch --tags"
+    sh "echo -e export GIT_COMMIT=\$(git rev-parse HEAD)\nexport GHE_VERSION=\$(git describe --tags --abbrev=0)\nexport BUILD_TIMESTAMP=\$(date +'%Y-%m-%dT%H:%M:%SZ') > .version_vars.conf"
+    stash includes: ".version_vars.conf", name:"versionVars"
+}
+
 pipeline {
   agent any
   environment {
@@ -49,6 +55,7 @@ pipeline {
       agent any
       steps{
         echo "this is an init stage"
+        getVersioningVariables()
       }
     }
     stage("Main Pipeline"){
@@ -56,8 +63,9 @@ pipeline {
         stage("Initialization") {
           agent any
           steps{
-            // set variables and generate files
-            sh "bash ${INIT_GENERATOR_SCRIPT}"
+            unstash "versionVars"
+            sh "cat .version_vars.conf"
+           
           }
         }
         stage("Bandit-Docker") {
@@ -69,7 +77,6 @@ pipeline {
         stage("Test parallel stage"){
           steps{
             echo "This is a parallel execution - to pass"
-            sh "git fetch --tags"
           }
         }
       }
