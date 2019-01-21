@@ -64,7 +64,7 @@ pipeline {
           agent any
           steps{
             unstash "versionVars"
-            sh "cat .version_vars.conf"
+            echo "\$(cat .version_vars.conf)"
            
           }
         }
