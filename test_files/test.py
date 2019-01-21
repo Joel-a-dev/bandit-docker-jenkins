@@ -1,6 +1,3 @@
-assert true
-#
-# 
-# WHY IS THIS NOT SHOWING UP
-#
-#
+import os 
+
+A = 5
