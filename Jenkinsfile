@@ -45,6 +45,9 @@ pipeline {
     }
 
   stages {
+    stage("init"){
+      echo "this is an init stage"
+    }
     stage("Main Pipeline"){
       parallel{
         stage("Initialization") {
