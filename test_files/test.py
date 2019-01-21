@@ -1,3 +1,5 @@
 import os 
-assert = true
+
+assert true
+
 A = 5
