@@ -16,7 +16,7 @@ def run_bandit_test(){
       return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
     }
     
-    sh "docker rm ${CONTAINER}"
+    sh "docker rm -v ${CONTAINER}"
     sh "docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
 
     if ("${return_s}" != '0') {
@@ -25,7 +25,7 @@ def run_bandit_test(){
         allowMissing: false,
         alwaysLinkToLastBuild: false,
         keepAll: true,
-        reportDir: './reports',
+        reportDir: './breports',
         reportFiles: 'banditReport.html',
         reportName: "Bandit Report"
       ])
