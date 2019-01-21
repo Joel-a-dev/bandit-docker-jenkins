@@ -12,27 +12,27 @@ def getVersion(){
 }
 
 def run_bandit_test(){
-    dir('bandit'){
+    dir('.bandit'){
       return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
     }
+    
+    sh "docker rm ${CONTAINER}"
+    sh "docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
+}
+
     //echo "$r{bandit_status}"
     if ("${return_s}" != '0') {
-      //publish results
+      //publish report to build page
       publishHTML (target: [
         allowMissing: false,
         alwaysLinkToLastBuild: false,
         keepAll: true,
         reportDir: './',
-        reportFiles: 'bandit/banditReport.html',
-        reportName: "Bandit.Report"
+        reportFiles: '.bandit/reports/banditReport.html',
+        reportName: "Bandit Report"
       ])
-      error "Bandit test failed : (${env.BUILD_URL})"
+      error "Bandit test failed"
     }
-}
-
-def cleanDocker(){
-  sh "docker rm ${CONTAINER}"
-  //sh docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
 }
 
 pipeline {
@@ -64,7 +64,6 @@ pipeline {
   post {
     always{
       deleteDir()
-      cleanDocker()
     }
     success {
       echo "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
