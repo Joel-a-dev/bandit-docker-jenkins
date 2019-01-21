@@ -3,7 +3,7 @@ FROM python:3.6-slim
 COPY . /app_temp
 
 RUN pip install bandit      && \
-    mkdir -p /app_tmp       $$ \
+    mkdir -p /app_tmp       && \
     chown -R $USER: /app_temp
 RUN chmod a+x /app_temp/.bandit/run_bandit.sh
 WORKDIR /app_temp
