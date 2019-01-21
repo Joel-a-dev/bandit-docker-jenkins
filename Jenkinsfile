@@ -34,7 +34,7 @@ def run_bandit_test(){
 }
 
 pipeline {
-  agent none
+  agent any
   environment {
       dir=pwd()
       INIT_GENERATOR_SCRIPT='generate-init-py.sh'
