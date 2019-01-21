@@ -69,6 +69,7 @@ pipeline {
         stage("Test parallel stage"){
           steps{
             echo "This is a parallel execution - to pass"
+            sh "git fetch --tags"
           }
         }
       }
