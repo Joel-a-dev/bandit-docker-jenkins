@@ -2,6 +2,8 @@ FROM python:3.6-slim
 
 COPY . /app_tmp
 
+RUN ls -lR /app_tmp
+
 RUN pip install bandit                    && \
     mkdir /app_tmp/.bandit/reports      && \
     chown -R $USER: /app_tmp
