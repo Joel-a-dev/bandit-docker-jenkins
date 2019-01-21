@@ -60,8 +60,7 @@ pipeline {
         }
         stage("Test parallel stage"){
           steps{
-            echo "This is a parallel execution - to fail"
-            sh "iwhklfnwe"
+            echo "This is a parallel execution - to pass"
           }
         }
       }
