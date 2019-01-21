@@ -35,7 +35,7 @@ def run_bandit_test(){
 
 def getVersioningVariables(){
     sh "git fetch --tags"
-    sh "echo -e export GIT_COMMIT=\$(git rev-parse HEAD)\nexport GHE_VERSION=\$(git describe --tags --abbrev=0)\nexport BUILD_TIMESTAMP=\$(date +'%Y-%m-%dT%H:%M:%SZ') > .version_vars.conf"
+    sh "echo -e \"export GIT_COMMIT=\$(git rev-parse HEAD)\nexport GHE_VERSION=\$(git describe --tags --abbrev=0)\nexport BUILD_TIMESTAMP=\$(date +'%Y-%m-%dT%H:%M:%SZ')\" > .version_vars.conf"
     stash includes: ".version_vars.conf", name:"versionVars"
 }
 
