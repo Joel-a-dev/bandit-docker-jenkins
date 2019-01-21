@@ -65,6 +65,7 @@ pipeline {
           steps{
             unstash "versionVars"
             sh "echo \$(cat .version_vars.conf)"
+            sh "ls -la"
            
           }
         }
