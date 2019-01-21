@@ -19,7 +19,6 @@ def run_bandit_test(){
     sh "docker rm ${CONTAINER}"
     sh "docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
 
-    //echo "$r{bandit_status}"
     if ("${return_s}" != '0') {
       //publish report to build page
       publishHTML (target: [
@@ -52,10 +51,19 @@ pipeline {
         sh "bash ${INIT_GENERATOR_SCRIPT}"
       }
     }
-    stage("Bandit-Docker") {
-      steps {
-        run_bandit_test()
+    stage("Main Pipeline"){
+      parallel{
+        stage("Bandit-Docker") {
+          steps {
+            run_bandit_test()
+          }
         }
+        stage("Test parallel stage"){
+          steps{
+            echo "This is a parallel execution - to pass"
+          }
+        }
+      }
     }
   }
   
