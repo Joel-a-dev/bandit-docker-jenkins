@@ -25,8 +25,8 @@ def run_bandit_test(){
         allowMissing: false,
         alwaysLinkToLastBuild: false,
         keepAll: true,
-        reportDir: './',
-        reportFiles: 'bandit/reports/banditReport.html',
+        reportDir: './reports',
+        reportFiles: 'banditReport.html',
         reportName: "Bandit Report"
       ])
       error "Bandit test failed"
@@ -45,14 +45,14 @@ pipeline {
     }
 
   stages {
-    stage("Initialization") {
-      steps{
-        // set variables and generate files
-        sh "bash ${INIT_GENERATOR_SCRIPT}"
-      }
-    }
     stage("Main Pipeline"){
       parallel{
+        stage("Initialization") {
+          steps{
+            // set variables and generate files
+            sh "bash ${INIT_GENERATOR_SCRIPT}"
+          }
+        }
         stage("Bandit-Docker") {
           steps {
             run_bandit_test()
