@@ -26,7 +26,7 @@ def run_bandit_test(){
         alwaysLinkToLastBuild: false,
         keepAll: true,
         reportDir: './',
-        reportFiles: 'bandit/reports/banditReport.html',
+        reportFiles: 'bandit/banditReport.html',
         reportName: "Bandit Report"
       ])
       error "Bandit test failed"
