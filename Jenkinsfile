@@ -37,6 +37,9 @@ def getVersioningVariables(){
     sh "git fetch --tags"
     sh "echo -e \"export GIT_COMMIT=\$(git rev-parse HEAD)\nexport GHE_VERSION=\$(git describe --tags --abbrev=0)\nexport BUILD_TIMESTAMP=\$(date +'%Y-%m-%dT%H:%M:%SZ')\" > .version_vars.conf"
     stash includes: ".version_vars.conf", name:"versionVars"
+
+    sh "echo \$(git rev-parse HEAD | head -c 7)-\$(date +%Y%m%d%H%M%S)  > .docker.tag"
+    stash includes: '.docker.tag', name: 'dockerTag'
 }
 
 pipeline {
@@ -64,9 +67,8 @@ pipeline {
           agent any
           steps{
             unstash "versionVars"
-            sh "echo \$(cat .version_vars.conf)"
             sh "ls -la"
-           
+            sh "cat .version_vars.conf"
           }
         }
         stage("Bandit-Docker") {
@@ -77,7 +79,9 @@ pipeline {
         }
         stage("Test parallel stage"){
           steps{
-            echo "This is a parallel execution - to pass"
+            unstash "dockerTag"
+            sh "ls -la"
+            sh "cat .docker.tag"
           }
         }
       }
