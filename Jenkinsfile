@@ -18,7 +18,6 @@ def run_bandit_test(){
     
     sh "docker rm ${CONTAINER}"
     sh "docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
-}
 
     //echo "$r{bandit_status}"
     if ("${return_s}" != '0') {
