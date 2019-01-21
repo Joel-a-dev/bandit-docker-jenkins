@@ -12,7 +12,7 @@ def getVersion(){
 }
 
 def run_bandit_test(){
-    dir('.bandit'){
+    dir('bandit'){
       return_s= sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
     }
     
@@ -27,7 +27,7 @@ def run_bandit_test(){
         alwaysLinkToLastBuild: false,
         keepAll: true,
         reportDir: './',
-        reportFiles: '.bandit/reports/banditReport.html',
+        reportFiles: 'bandit/reports/banditReport.html',
         reportName: "Bandit Report"
       ])
       error "Bandit test failed"
