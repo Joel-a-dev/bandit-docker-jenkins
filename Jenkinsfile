@@ -24,7 +24,7 @@ def run_bandit_test(){
         allowMissing: false,
         alwaysLinkToLastBuild: false,
         keepAll: true,
-        reportDir: './breports',
+        reportDir: './reports',
         reportFiles: 'banditReport.html',
         reportName: "Bandit Report"
       ])
