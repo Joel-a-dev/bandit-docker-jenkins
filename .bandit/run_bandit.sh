@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -v 
-BANDIT_CONFIG='config/bandit.config.yaml'
+BANDIT_CONFIG='/app_temp/.bandir/bandit.config.yaml'
 REPORT_HTML='/app_tmp/.bandit/reports/banditReport.html'
 REPORT_TXT='/app_tmp/.bandit/reports/banditReport.txt'
 
