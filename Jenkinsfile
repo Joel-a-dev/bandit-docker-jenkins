@@ -12,12 +12,12 @@ def getVersion(){
 }
 
 def run_bandit_test(){
-
-    COMMIT_SHA= sh(returnStdout: true, script: "git rev-parse HEAD | head -c 7").trim()
-    CONTAINER="bandit-test-${COMMIT_SHA}"
-    BANDIT_IMAGE="bandit-${BRANCH_NAME}"
-    BANDIT_TAG="${COMMIT_SHA}"
-
+  script{
+    env.COMMIT_SHA= sh(returnStdout: true, script: "git rev-parse HEAD | head -c 7").trim()
+    env.CONTAINER="bandit-test-${COMMIT_SHA}"
+    env.BANDIT_IMAGE="bandit-${BRANCH_NAME}"
+    env.BANDIT_TAG="${COMMIT_SHA}"
+  }
      dir('bandit'){
       sh(script:"bash ${BANDIT_DOCKER_SCRIPT}")
     }
