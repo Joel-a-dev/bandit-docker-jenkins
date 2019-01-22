@@ -48,9 +48,11 @@ pipeline {
       dir=pwd()
       INIT_GENERATOR_SCRIPT='generate-init-py.sh'
       BANDIT_DOCKER_SCRIPT='bandit_test_docker.sh'
-      BANDIT_IMAGE='bandit'
-      BANDIT_TAG="$BUILD_NUMBER"
-      CONTAINER="bandit-tests-${BUILD_NUMBER}"
+      // Bandit Test
+        BANDIT_DOCKER_SCRIPT= 'bandit_test_docker.sh'
+        CONTAINER="bandit-test-${env.GIT_COMMIT}"
+        BANDIT_IMAGE="bandit"
+        BANDIT_TAG="${env.GIT_COMMIT}"
     }
     
   stages {
