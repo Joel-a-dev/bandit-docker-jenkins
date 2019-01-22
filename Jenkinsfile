@@ -51,8 +51,14 @@ pipeline {
       BANDIT_TAG='python3-alpine'
       CONTAINER='bandit_tests'
     }
-
+    
   stages {
+    stage("env"){
+      agent any
+      steps{
+        echo sh(returnStdout: true, script: 'env')
+      }
+    }
     stage("init"){
       agent any
       steps{
