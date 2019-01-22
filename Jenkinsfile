@@ -15,7 +15,7 @@ def run_bandit_test(){
 
     COMMIT_SHA= sh(returnStdout: true, script: "git rev-parse HEAD | head -c 7").trim()
     CONTAINER="bandit-test-${COMMIT_SHA}"
-    BANDIT_IMAGE="bandit-${JENKINS_BRANCH}"
+    BANDIT_IMAGE="bandit-${BRANCH_NAME}"
     BANDIT_TAG="${COMMIT_SHA}"
 
      dir('bandit'){
