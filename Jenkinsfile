@@ -12,7 +12,13 @@ def getVersion(){
 }
 
 def run_bandit_test(){
-    dir('bandit'){
+
+    COMMIT_SHA= sh(returnStdout: true, script: "git rev-parse HEAD | head -c 7").trim()
+    CONTAINER="bandit-test-${COMMIT_SHA}"
+    BANDIT_IMAGE="bandit-${JENKINS_BRANCH}"
+    BANDIT_TAG="${COMMIT_SHA}"
+
+     dir('bandit'){
       sh(script:"bash ${BANDIT_DOCKER_SCRIPT}")
     }
     sh(script:"docker exec -i ${CONTAINER} chmod a+x /app_src/bandit/run_bandit.sh")
@@ -53,9 +59,6 @@ pipeline {
       INIT_GENERATOR_SCRIPT='generate-init-py.sh'
       // Bandit Test
         BANDIT_DOCKER_SCRIPT= 'bandit_test_docker.sh'
-        CONTAINER="bandit-test-${GIT_COMMIT}"
-        BANDIT_IMAGE="bandit"
-        BANDIT_TAG="${GIT_COMMIT}"
     }
     
   stages {
