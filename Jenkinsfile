@@ -47,7 +47,6 @@ pipeline {
   environment {
       dir=pwd()
       INIT_GENERATOR_SCRIPT='generate-init-py.sh'
-      BANDIT_DOCKER_SCRIPT='bandit_test_docker.sh'
       // Bandit Test
         BANDIT_DOCKER_SCRIPT= 'bandit_test_docker.sh'
         CONTAINER="bandit-test-${env.GIT_COMMIT}"
