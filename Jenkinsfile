@@ -13,9 +13,11 @@ def getVersion(){
 
 def run_bandit_test(){
   script{
+    name="MASTER"
+    env.BRANCH=name.toLowerCase()
     env.COMMIT_SHA= sh(returnStdout: true, script: "git rev-parse HEAD | head -c 7").trim()
     env.CONTAINER="bandit-test-${COMMIT_SHA}"
-    env.BANDIT_IMAGE="bandit-${BRANCH_NAME}"
+    env.BANDIT_IMAGE="bandit-${BRANCH}"
     env.BANDIT_TAG="${COMMIT_SHA}"
   }
      dir('bandit'){
