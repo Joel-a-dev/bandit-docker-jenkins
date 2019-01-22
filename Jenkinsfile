@@ -18,8 +18,8 @@ def run_bandit_test(){
     sh(script:"docker exec -i ${CONTAINER} chmod a+x /app_src/bandit/run_bandit.sh")
     return_s= sh(returnStatus:true, script:"docker exec -i ${CONTAINER} /app_src/bandit/run_bandit.sh")
     echo "${return_s}"
-    sh "docker rm  ${CONTAINER}"
-    sh "docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
+    sh "docker rm  -f ${CONTAINER}"
+    sh "docker rmi -f ${BANDIT_IMAGE}:${BANDIT_TAG}"
 
     if ("${return_s}" != '0') {
       //archiveArtifacts artifacts: 'reports/banditReport.html'
