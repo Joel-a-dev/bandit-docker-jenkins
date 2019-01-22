@@ -16,7 +16,7 @@ def run_bandit_test(){
       sh(returnStatus:true, script:"bash ${BANDIT_DOCKER_SCRIPT}")
     }
     return_s= sh(returnStatus:true, script:"bash docker exec -it ${CONTAINER} /app_src/bandit/run_bandit.sh")
-    echo $return_s
+    echo "${return_s}"
     sh "docker rm  ${CONTAINER}"
     sh "docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
 
