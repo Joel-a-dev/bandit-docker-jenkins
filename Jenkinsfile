@@ -19,7 +19,7 @@ def run_bandit_test(){
     sh "docker rmi ${BANDIT_IMAGE}:${BANDIT_TAG} "
 
     if ("${return_s}" != '0') {
-      archiveArtifacts artifacts: 'reports/banditReport.html'
+      //archiveArtifacts artifacts: 'reports/banditReport.html'
       //publish report to build page
       publishHTML (target: [
         allowMissing: false,
