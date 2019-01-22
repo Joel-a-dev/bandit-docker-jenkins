@@ -1,5 +1,5 @@
 def getCommit(){
-  return sh(returnStdout: true, script: "git rev-parse HEAD").trim()
+  return sh(returnStdout: true, script: "git rev-parse HEAD | head -c 7").trim()
 }
 
 def getBuildTimestamp(){
@@ -48,13 +48,14 @@ def getVersioningVariables(){
 pipeline {
   agent any
   environment {
+      GIT_COMMIT=getCommit()
       dir=pwd()
       INIT_GENERATOR_SCRIPT='generate-init-py.sh'
       // Bandit Test
         BANDIT_DOCKER_SCRIPT= 'bandit_test_docker.sh'
-        CONTAINER="bandit-test-${env.GIT_COMMIT}"
+        CONTAINER="bandit-test-${GIT_COMMIT}"
         BANDIT_IMAGE="bandit"
-        BANDIT_TAG="${env.GIT_COMMIT}"
+        BANDIT_TAG="${GIT_COMMIT}"
     }
     
   stages {
