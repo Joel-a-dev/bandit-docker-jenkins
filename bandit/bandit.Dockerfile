@@ -2,7 +2,7 @@ FROM python:3.6-slim
 
 COPY . /app_src
 
-RUN pip install bandit                   && \
+RUN pip3 install bandit                   && \
     mkdir /reports                       && \
     chmod -R 777 /reports
 #    chown -R $USER: /app_src
