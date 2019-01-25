@@ -12,7 +12,7 @@ def getVersion(){
 }
 
 def run_bandit_test(){
-    PWD=sh(returnStdout: true, script:"pwd")
+    //PWD=sh(returnStdout: true, script:"pwd")
     return_s= sh(returnStatus:true, script:"docker run --rm -w /app_src -v \${PWD}:/app_src python:3.6-slim /bin/bash -c  \"chmod +x /app_src/bandit/run_bandit.sh;/app_src/bandit/run_bandit.sh\"")
     echo "${return_s}"
     if ("${return_s}" != '0') {
@@ -64,7 +64,7 @@ pipeline {
         stage("bandit tests"){
           agent any
           steps{
-            run_bandit_test()
+            //run_bandit_test()
           }
         }
       }
