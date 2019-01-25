@@ -65,6 +65,7 @@ pipeline {
           agent any
           steps{
             //run_bandit_test()
+            echo "bam!"
           }
         }
       }
