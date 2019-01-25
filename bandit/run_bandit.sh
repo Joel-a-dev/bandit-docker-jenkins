@@ -6,6 +6,7 @@ REPORT_TXT='/app_src/reports/banditReport.txt'
 
 pip3 install bandit
 
+mkdir reports
 chmod -R 777 /app_src
 
 bandit -r -f txt -o ${REPORT_TXT} /app_src
