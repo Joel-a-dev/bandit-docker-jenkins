@@ -64,7 +64,7 @@ pipeline {
         stage("bandit tests"){
           agent any
           steps{
-            
+            run_bandit_test()
           }
         }
       }
