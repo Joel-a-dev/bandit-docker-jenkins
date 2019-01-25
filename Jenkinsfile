@@ -13,7 +13,7 @@ def getVersion(){
 
 def run_bandit_test(){
     sh("chmod a+x bandit/run_bandit.sh")
-    return_s= sh(returnStatus:true, script:"docker run --rm -w /app_src -v $PWD:/app_src python:3.6 /app_src/bandit/run_bandit.sh")
+    return_s= sh(returnStatus:true, script:"docker run --rm -w \"/app_src\" -v $PWD:/app_src python:3.6 /app_src/bandit/run_bandit.sh")
     echo "${return_s}"
     if ("${return_s}" != '0') {
       publishHTML (target: [
