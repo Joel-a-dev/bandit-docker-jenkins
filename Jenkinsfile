@@ -12,25 +12,10 @@ def getVersion(){
 }
 
 def run_bandit_test(){
-  script{
-    env.BRANCH=env.GIT_BRANCH.toLowerCase()
-    env.COMMIT_SHA= sh(returnStdout: true, script: "git rev-parse HEAD | head -c 7").trim()
-    env.CONTAINER="bandit-test-${COMMIT_SHA}"
-    env.BANDIT_IMAGE="bandit-${BRANCH}"
-    env.BANDIT_TAG="${COMMIT_SHA}"
-  }
-     dir('bandit'){
-      sh(script:"bash ${BANDIT_DOCKER_SCRIPT}")
-    }
-    sh(script:"docker exec -i ${CONTAINER} chmod a+x /app_src/bandit/run_bandit.sh")
-    return_s= sh(returnStatus:true, script:"docker exec -i ${CONTAINER} /app_src/bandit/run_bandit.sh")
+    sh("chmod a+x bandit/run_bandit.sh")
+    return_s= sh(returnStatus:true, script:"docker run --rm -w /app_src -v $PWD:/app_src python:3.6-slim /app_src/bandit/run_bandit.sh")
     echo "${return_s}"
-    sh "docker rm  -f ${CONTAINER}"
-    sh "docker rmi -f ${BANDIT_IMAGE}:${BANDIT_TAG}"
-
     if ("${return_s}" != '0') {
-      //archiveArtifacts artifacts: 'reports/banditReport.html'
-      //publish report to build page
       publishHTML (target: [
         allowMissing: false,
         alwaysLinkToLastBuild: false,
@@ -58,8 +43,6 @@ pipeline {
       GIT_COMMIT=getCommit()
       dir=pwd()
       INIT_GENERATOR_SCRIPT='generate-init-py.sh'
-      // Bandit Test
-        BANDIT_DOCKER_SCRIPT= 'bandit_test_docker.sh'
     }
     
   stages {
@@ -70,10 +53,20 @@ pipeline {
       }
     }
     stage("init"){
-      agent any
-      steps{
-        echo "this is an init stage"
-        getVersioningVariables()
+      parallel{
+        stage("pre-setup"){
+          agent any
+          steps{
+            echo "this is an init stage"
+            getVersioningVariables()
+          }
+        }
+        stage("bandit tests"){
+          agent any
+          steps{
+            
+          }
+        }
       }
     }
     stage("Main Pipeline"){
