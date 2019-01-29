@@ -32,8 +32,7 @@ def run_bandit_test(){
         reportName: "Bandit Report"
       ])
       
-      echo "Bandit test failed"
-      sh "exit 1"
+      sh (script:"echo Bandit test failed && exit 1")
       //error "Bandit test failed"
       //currentBuild.result = 'FAILURE'
     }
