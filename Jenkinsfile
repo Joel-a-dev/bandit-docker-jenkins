@@ -31,7 +31,10 @@ def run_bandit_test(){
         reportFiles: 'banditReport.html',
         reportName: "Bandit Report"
       ])
-      error "Bandit test failed"
+      
+      echo "Bandit test failed"
+      sh "exit 1"
+      //error "Bandit test failed"
       //currentBuild.result = 'FAILURE'
     }
 }
