@@ -2,6 +2,13 @@ def getCommit(){
   return sh(returnStdout: true, script: "git rev-parse HEAD | head -c 7").trim()
 }
 
+def node_details() {
+    sh """
+    printf "Node          : ${env.NODE_NAME}\nHostname      : \$(hostname)\n\$(docker --version)\n"
+    """
+}
+
+
 def getBuildTimestamp(){
   return sh(returnStdout: true, script: "date +'%Y-%m-%dT%H:%M:%SZ'").trim()
 }
@@ -25,7 +32,7 @@ def run_bandit_test(){
         reportName: "Bandit Report"
       ])
       error "Bandit test failed"
-      currentBuild.result = 'FAILURE'
+      //currentBuild.result = 'FAILURE'
     }
 }
 
@@ -72,21 +79,42 @@ pipeline {
       }
     }
     stage("Main Pipeline"){
-      parallel{
-        stage("Initialization") {
+      parallel {
+        stage('Bandit Test'){
+            agent any
+            steps {
+                run_bandit_test()
+            }
+        }   
+        stage('x86') {
           agent any
-          steps{
-            unstash "versionVars"
-            sh "ls -la"
-            sh "cat .version_vars.conf"
+          stages {
+            stage('init x86_64') {
+                steps {
+                    script {
+                        env.X86_NODE = "${env.NODE_NAME}"
+                        node_details()
+                    }
+                }
+            }
+            stage('Build x86_64') {
+                steps {
+                    script {
+                        echo "build"
+                    }
+                }
+            }
+
+            stage('Publish x86_64') {
+                steps {
+                    script {
+                        echo "publish"
+                    }
+              }
+            }
           }
         }
-        stage("Bandit-Docker") {
-          agent any
-          steps {
-            run_bandit_test()
-          }
-        }
+      }
         stage("Test parallel stage"){
           steps{
             unstash "dockerTag"
