@@ -125,7 +125,6 @@ pipeline {
         }
       }
     }
-  }
   
   // Post in Stage executes at the end of Stage instead of end of Pipeline
   post {
