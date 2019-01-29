@@ -91,6 +91,7 @@ pipeline {
             unstash "dockerTag"
             sh "ls -la"
             sh "cat .docker.tag"
+            sh "sleep 150"
           }
         }
       }
