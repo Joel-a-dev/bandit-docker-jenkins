@@ -69,10 +69,9 @@ pipeline {
             getVersioningVariables()
           }
         }
-        stage("bandit tests"){
+        stage("parallel stage"){
           agent any
           steps{
-            //run_bandit_test()
             echo "bam!"
           }
         }
@@ -115,6 +114,7 @@ pipeline {
           }
         }
       }
+    }
         stage("Test parallel stage"){
           steps{
             unstash "dockerTag"
@@ -124,7 +124,7 @@ pipeline {
           }
         }
       }
-    }
+    
   
   // Post in Stage executes at the end of Stage instead of end of Pipeline
   post {
