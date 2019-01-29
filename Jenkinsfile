@@ -24,6 +24,7 @@ def run_bandit_test(){
         reportName: "Bandit Report"
       ])
       error "Bandit test failed"
+      currentBuild.result = 'FAILURE'
     }
 }
 
